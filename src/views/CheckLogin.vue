@@ -10,6 +10,9 @@
         <li class="fs-3">
           <router-link to="/checkLogin/loginPage2">頁面 B</router-link>
         </li>
+        <li class="fs-3">
+          <button type="button" @click="deleteCookie">刪除 cookie</button>
+        </li>
       </ul>
       <router-view></router-view>
     </template>
@@ -67,6 +70,17 @@ export default {
             this.$store.commit('CLOSE_LOADING')
           })
       }
+    },
+    //* 刪除 cookie
+    deleteCookie () {
+      function setCookie (cname, cvalue, exdays) {
+        const d = new Date()
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
+        const expires = 'expires=' + d.toUTCString()
+        document.cookie = cname + '=' + cvalue + '; ' + expires
+      }
+
+      setCookie('loginToken', '', -1)
     }
   },
 
