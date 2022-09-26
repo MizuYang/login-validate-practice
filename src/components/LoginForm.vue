@@ -99,21 +99,20 @@ export default {
         console.log(api)
         this.$http.post(api, this.userLoginForm)
           .then(res => {
+            console.log(res)
+
             this.$store.commit('CLOSE_LOADING')
 
             //* token, expired 存入 cookie
             const { token, expired } = res.data
             document.cookie = `loginToken=${token};expires=${new Date(expired)};`
 
-            // this.$store.commit('LOGIN_SUCCESS')
-
             this.$router.push('/checkLogin')
-            console.log(res)
           })
           .catch(err => {
-            this.$store.commit('CLOSE_LOADING')
-            // this.$store.commit('LOGIN_FAIL')
             console.log(err)
+
+            this.$store.commit('CLOSE_LOADING')
             this.loginFailFeedback(err.response.data.error.message)
           })
         resolve()

@@ -2,7 +2,15 @@
   <div class="center-center">
     <!-- 登入成功(需驗證通過才顯示) -->
     <template v-if="loginSuccess">
-      <h3>恭喜你!!登入成功!!!</h3>
+      <h2 class="text-success">恭喜你!!登入成功!!!</h2>
+      <ul>
+        <li class="fs-3">
+          <router-link to="/checkLogin/loginPage1">頁面 A</router-link>
+        </li>
+        <li class="fs-3">
+          <router-link to="/checkLogin/loginPage2">頁面 B</router-link>
+        </li>
+      </ul>
       <router-view></router-view>
     </template>
 
@@ -35,8 +43,6 @@ export default {
   methods: {
     //* 檢查登入狀態
     checkLogin () {
-      this.$store.commit('OPEN_LOADING')
-
       //* 取出 token
       const token = document.cookie.replace(
         /(?:(?:^|.*;\s*)loginToken\s*=\s*([^;]*).*$)|^.*$/,
@@ -44,6 +50,8 @@ export default {
       )
 
       if (token) {
+        this.$store.commit('OPEN_LOADING')
+
         //* axios 預設帶入 token 就不用每次都要帶 headers: { Authorization: token } 了
         this.$http.defaults.headers.common.Authorization = token
         const api = `${process.env.VUE_APP_LOGIN_API}/api/user/check`
