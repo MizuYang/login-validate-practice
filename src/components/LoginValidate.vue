@@ -13,12 +13,12 @@
       <i ref="password" class="text-danger"></i>
       <br />
 
+      <i ref="loginFeedback" class="text-danger"></i>
+
       <div class="mt-3 mb-5">
         <button class="btn btn-primary w-100 mb-2" type="submit">登入</button>
-        <button class="btn btn-secondary w-100">取消</button>
       </div>
     </section>
-
   </form>
 
   <IsLoading v-model:active="isLoading"></IsLoading>
@@ -34,8 +34,10 @@ export default {
         password: ''
       },
       i18n: {
-        account: '帳號',
-        password: '密碼'
+        username: '帳號',
+        password: '密碼',
+        'The email address is badly formatted.': 'Email 格式錯誤!!!',
+        'The password is invalid or the user does not have a password.': '密碼錯誤!!!'
       }
     }
   },
@@ -98,23 +100,32 @@ export default {
         this.$http.post(api, this.userLoginForm)
           .then(res => {
             this.$store.commit('CLOSE_LOADING')
+
+            //* token, expired 存入 cookie
+            const { token, expired } = res.data
+            document.cookie = `loginToken=${token};expires=${new Date(expired)};`
+
+            this.$store.commit('LOGIN_SUCCESS')
+
+            this.$router.push('/student')
             console.log(res)
           })
           .catch(err => {
             this.$store.commit('CLOSE_LOADING')
+            this.$store.commit('LOGIN_FAIL')
             console.log(err)
-            this.loginFailFeedback()
+            this.loginFailFeedback(err.response.data.error.message)
           })
         resolve()
       })
     },
-    // //* 登入帳密錯誤回饋
-    // loginSuccessFeedback () {
-
-    // },
     //* 登入失敗回饋
-    loginFailFeedback () {
-
+    loginFailFeedback (errMessage) {
+      if (this.i18n[errMessage]) {
+        this.$refs.loginFeedback.textContent = `${this.i18n[errMessage]}`
+      } else {
+        this.$refs.loginFeedback.textContent = '您輸入的帳號錯誤 或 密碼錯誤太多次遭到鎖定，請重新更改密碼即可正常使用!!'
+      }
     }
   },
 

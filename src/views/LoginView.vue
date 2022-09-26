@@ -2,7 +2,6 @@
   <!-- 登入元件 -->
   <LoginValidate></LoginValidate>
 
-  <IsLoading v-model:active="isLoading"></IsLoading>
 </template>
 
 <script>
@@ -14,20 +13,10 @@ export default {
 
   data () {
     return {
-      isLoading: false
     }
   },
 
   mounted () {
-    // this.isLoading = true
-    // this.$http.get('https://randomuser.me/api/')
-    //   .then(res => {
-    //     console.log(res)
-    //     this.isLoading = false
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
   }
 }
 </script>
