@@ -6,8 +6,8 @@ const routes = [
     component: () => import('@/views/LoginView.vue')
   },
   {
-    path: '/student',
-    component: () => import('../views/StudentView.vue')
+    path: '/checkLogin',
+    component: () => import('../views/CheckLogin.vue')
   }
   // { //* 代表所有主頁面下的頁面，路由錯誤都會被導向
   //   path: '/:pathMatch(.*)*',

@@ -105,14 +105,14 @@ export default {
             const { token, expired } = res.data
             document.cookie = `loginToken=${token};expires=${new Date(expired)};`
 
-            this.$store.commit('LOGIN_SUCCESS')
+            // this.$store.commit('LOGIN_SUCCESS')
 
-            this.$router.push('/student')
+            this.$router.push('/checkLogin')
             console.log(res)
           })
           .catch(err => {
             this.$store.commit('CLOSE_LOADING')
-            this.$store.commit('LOGIN_FAIL')
+            // this.$store.commit('LOGIN_FAIL')
             console.log(err)
             this.loginFailFeedback(err.response.data.error.message)
           })

@@ -1,14 +1,14 @@
 <template>
   <!-- 登入元件 -->
-  <LoginValidate></LoginValidate>
+  <LoginForm></LoginForm>
 
 </template>
 
 <script>
-import LoginValidate from '../components/LoginValidate.vue'
+import LoginForm from '../components/LoginForm.vue'
 export default {
   components: {
-    LoginValidate
+    LoginForm
   },
 
   data () {

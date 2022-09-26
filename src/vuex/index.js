@@ -3,8 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   strict: false, // 嚴謹模式
   state: {
-    isLoading: false,
-    loginSuccess: false
+    isLoading: false
+    // loginSuccess: false
   },
   actions: {
     // 負責觸發 mutations
@@ -18,14 +18,6 @@ export default createStore({
     //* 關閉 loading
     CLOSE_LOADING (store) {
       store.isLoading = false
-    },
-    //* 登入成功
-    LOGIN_SUCCESS (store) {
-      store.loginSuccess = true
-    },
-    //* 登入失敗
-    LOGIN_FAIL (store) {
-      store.loginSuccess = false
     }
   },
   getters: {
@@ -36,7 +28,3 @@ export default createStore({
     // 每個 module 都有自己的state, actions, mutations, getters, modules
   }
 })
-
-//* 把 loading 狀態放進 store
-//* 登入時有 loading 效果
-//* 頁面跳轉
