@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/login',
+    path: '/',
     component: () => import('@/views/LoginView.vue')
   },
   {

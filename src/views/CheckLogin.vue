@@ -20,7 +20,7 @@
     <!-- 登入失敗 -->
     <div v-else class="text-danger">
       <h3>登入失敗</h3>
-      <router-link to="/login">點擊此處重新登入</router-link>
+      <router-link to="/">點擊此處重新登入</router-link>
     </div>
   </div>
 
